@@ -13,6 +13,19 @@
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World!');
+		if(request.method.toUpperCase() === "POST") {
+			const data = {
+				hello: "world",
+			};
+
+			return Response.json(data);
+		}
+		else{
+			return new Response('Error Worker! Wrong Method', {
+				headers: {
+					'content-type': 'text/plain',
+				},
+			});
+		}
 	},
 };
